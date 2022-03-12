@@ -1,0 +1,28 @@
+Rezolvarea temei a implicat gasirea unor solutii pentru 4 probleme:
+            1-  cum creem o functie cu numar variabil de parametrii
+            2-  determinarea memoriei necesare sirului formatat 
+            3-  Introducerea unor argumente de tipuri diferite intr-un sir de caractere
+            4-  convertirea argumentelor de tip numar la baze diferite
+
+        Pentru prima problema am folosit tipul va_list, tip ce permite preluarea de argumente suplimentare,
+iar porniind de la argumentul format am citit argumente suplimentare unde era cazul.
+
+	Cea de a doua  problema a fost solutionata prin alocarea si realocarea dinamica a memoriei.
+Neavand un mod aparent de a afla de la inceput cata memorie va fi necesara si deoarece 
+alocarea statica a unei memorii uriase (i.e un vector de 10000 de elemente) ar fi fost risipitoare,
+am optat la folosirea unui pointer ce are o marime de inceput egala cu sirul initial format, aceasta fiind
+actualizata cu realloc atunci cand este cazul.
+
+	problemele 3 si 4 au fost rezolvate folosiind aceeasi functie auxiliara, mai exact 
+functia de conversie itoa. Deoarece functia originala nu este definita in libraria standard
+si este implementata doar de anumite compilatoare, am facut propria implementare.
+Deoarece o functie itoa ce lucreaza cu variabile int ar rezolva overflowul ce poate fi rezultat
+din pasarea unui numar negativ la parametrii de tip unsigned, facand astfel redundanta
+diferenta intre int si unsigned int in functie, am ales ca functia itoa sa lucreze cu numere unsigned,
+abordand cazul numerelor negative in afara functiei.
+
+	Toate au fost puse impreuna intr-o bucla for, care itereaza prin sirul argument, pune 
+caracterele normale in sirul de iesire  iar in cazul in care se da de un indicator de 
+argument (%d, %u, etc..) se citeste un argument nou de tipul dorit, se foloseste functia itoa
+unde este necesara conversia, se actualizeaza capacitatea sirului de iesire si se copiaza argumentul 
+convertit in acesta. 
